@@ -4,6 +4,7 @@ import mongoose, { mongo } from "mongoose"
 import userRouter from "./routes/userRouter.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import route from "./routes/seatRoute.js";
 
 
 dotenv.config();
@@ -43,6 +44,7 @@ connection.once("open",()=>{
 })
 
 app.use("/api/users",userRouter);
+app.use("/api/seats",route);
 
 
 

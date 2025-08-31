@@ -7,11 +7,11 @@ const seatSchema = new mongoose.Schema({
         unique : true,
     },
     location :{
-        trype : String,
+        type : String,
         required: true,
 
     },
-    avalability :{
+   availability :{
         type : Boolean,
         required : true,
 
