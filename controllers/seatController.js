@@ -4,7 +4,7 @@ import { isItAdmin,isItCustomer } from "./userController.js";
 
 export async function addSeat(req,res){
   
-    if(isItAdmin(req)){
+    if(isItAdmin(req)){     
     const seatData = req.body;
     const newSeat = new seat(seatData);
 try{
