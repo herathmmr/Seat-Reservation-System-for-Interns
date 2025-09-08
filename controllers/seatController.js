@@ -75,5 +75,33 @@ export async function  getALLSeat(req,res){
         res.status(500).json({message : "failed to fetch seats", error : error.message})
     }
 }
+export async function BookSeat(req,res){
+    const seatID = req.params.seatNumber;
+    const seatData = req.body;
+    try{
+        if(isItAdmin(req)|| isItCustomer){
+
+            const seatDoc = await seat.findOne({seatNumber : seatID})
+            if(!seatDoc){
+                res.json({message : "seat not found"})
+            }
+
+
+            if(seatDoc.availability == true){
+                await seat.updateOne({seatNumber :seatID}, {$set:{ ...seatData, availability: false }})
+                res.json({message:"booked"})
+                return;
+            }else{
+                res.json({message :"cant boook"})
+            }
+
+
+        }
+
+
+    }catch{
+         res.status(500).json({message : "failed to Book seat", error : error.message})
+    }
+}
 
     
