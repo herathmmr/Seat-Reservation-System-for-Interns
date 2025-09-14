@@ -60,6 +60,20 @@ export function loginUser(req,res){
     })
 }
 
+export async function getAllUsers(req,res) {
+    try{
+        if(isItAdmin(req)){
+            const users =  await UserModel.find()
+            res.json(users)
+
+        }else{ res.json({message : "your not authorize"})}
+
+    }catch{
+        res.status(500).json({message : "failed to get users", error : error.message})
+    }
+    
+}
+
 export function isItAdmin(req){
     
     let isAdmin = false;
