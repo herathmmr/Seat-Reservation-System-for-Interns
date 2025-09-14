@@ -1,60 +1,58 @@
 import mongoose from "mongoose";
+import mongooseSequence from "mongoose-sequence";
+
+const autoIncrement = mongooseSequence(mongoose);
 
 const userSchema = new mongoose.Schema({
-    internId:{
-        type : Number,
-        required : true,
-        unique : true,
-    },
-email:{
-    type : String,
+  email: {
+    type: String,
     required: true,
     unique: true,
     lowercase: true,
     trim: true,
-},
+  },
 
-password: {
-    type : String,
-    required : true,
-    unique : true,
-},
-role :{
+  password: {
     type: String,
-    enum: ['customer', 'admin'],
-    required : true,
-    default :"customer"
-},
-
-firstName :{
-    type :String,
-    required:true,
-},
-lastName : {
-    type : String,
     required: true,
-},
+    unique: true,
+  },
 
-address : {
-    type :String,
-    required :true,
-},
+  role: {
+    type: String,
+    enum: ["customer", "admin"],
+    required: true,
+    default: "customer",
+  },
 
-phone : {
-    type : String,
-    required :true,
-},
-profilePicture:{
-    type : String,
-    required : true,
-    default : "https://images.app.goo.gl/kP5SNwBts5ZFh5UJA"
-}
+  firstName: {
+    type: String,
+    required: true,
+  },
 
+  lastName: {
+    type: String,
+    required: true,
+  },
+
+  address: {
+    type: String,
+    required: true,
+  },
+
+  phone: {
+    type: String,
+    required: true,
+  },
+
+  profilePicture: {
+    type: String,
+    required: true,
+    default: "https://images.app.goo.gl/kP5SNwBts5ZFh5UJA",
+  },
 });
-const UserModel =mongoose.model("users",userSchema);
 
+userSchema.plugin(autoIncrement, { inc_field: "internId" });
 
+const UserModel = mongoose.model("users", userSchema);
 export default UserModel;
-
-
-

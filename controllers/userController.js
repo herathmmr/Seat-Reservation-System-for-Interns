@@ -44,6 +44,7 @@ export function loginUser(req,res){
             if(isPasswordCorrect){
 
                 const token = jwt.sign({
+                    internId :user.internId,
                     firstName : user.firstName,
                     lastName : user.lastName,
                     email : user.email,
@@ -51,7 +52,7 @@ export function loginUser(req,res){
                     profilePicture:user.profilePicture, 
                     phone : user.phone,       // me thiyenne api encrypt krnn ona data tika meke thiyenne
                                       },process.env.SECRET_KEY) //methna malshan1234 kiynne website eka api dana password eka //me comment ekath ain wenna ona commit krddi
-                res.json({message :" login successfull",token:token});
+                res.json({message :" login successfull",token:token,user:user});
             }else{
                 res.status(404).json({error:"login fail"})
             }
